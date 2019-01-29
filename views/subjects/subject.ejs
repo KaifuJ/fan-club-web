@@ -1,0 +1,49 @@
+<% include ../partials/header %>
+
+<link rel="stylesheet" href="/stylesheets/subject.css">
+
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <div class="container">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <%= subject.title %>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="posts" id="firstFloor"><%= subject.content %></td>
+                        </tr>
+
+                        <% subject.posts.forEach(function(post){ %>
+                        <tr>
+                            <td class="posts"><%= post.content %></td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+                <hr class="mt-0 mb-3">
+                <form action="/subjects/<%= subject._id %>/posts" method="POST">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="height: 175px">跟帖</span>
+                        </div>
+                        <textarea name="postContent" class="form-control" style="resize: none"></textarea>
+                    </div>
+                    <p class="d-flex justify-content-end mt-2">
+                        <input class="btn btn-dark" type="submit" value="发布">
+                    </p>
+                </form>
+            </div>
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

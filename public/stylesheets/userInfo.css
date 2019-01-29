@@ -1,0 +1,14 @@
+#avatar {
+    width: 150px;
+    height: 150px;
+    float: left;
+}
+
+#avatar img {
+    width: 150px;
+    height: 150px;
+}
+
+input[type=file] {
+    width: 200px;
+}

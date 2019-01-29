@@ -1,0 +1,92 @@
+<% include ../partials/header %>
+
+<script src="/scripts/userInfo.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/stylesheets/userInfo.css">
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-3">
+            <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">基本信息</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">发表的主题帖</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">发表的回复</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">私信消息</a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <ul class="list-group list-group-flush">
+                    <li class="d-flex justify-content-between list-group-item">
+                        <div>
+                            <div style="float:left">头像：</div>
+                            <div id="avatar">
+                                <img src="<%= user.avatarUrl %>" alt="..." class="img-thumbnail">
+                            </div>
+                        </div>
+                        <form>
+                            <p class="d-flex justify-content-end mb-2">
+                                <input type="file" accept="image/*" data-max-size="5000"/>
+                            </p>
+                            <p class="d-flex justify-content-end">
+                                <button id="avatarUpload" type="button" class="btn btn-secondary">上传头像</button>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="list-group-item">用户名：<%= user.username %></li>
+                    <li class="list-group-item">Email：<%= user.email %></li>
+                    <!-- <li class="list-group-item">当前等级：<%= user.level %></li> -->
+                    <li class="list-group-item">当前积分：<%= user.credits %></li>
+                    <li class="list-group-item">毛岁：<%= user.createdAt %></li>
+                    <li class="list-group-item">最近活跃：<%= user.updatedAt %></li>
+                </ul>
+            </div>
+
+            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="w-75" >主题</th>
+                            <th scope="col" class="w-25">最后更新</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% user.subjects.forEach(function(subj){ %>
+                            <tr>
+                                <td class="w-75"><a href="/subjects/<%= subj._id %>"><%= subj.title %></a></td>
+                                <td class="w-25"><%= subj.updatedAt %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="w-25" >主题</th>
+                            <th scope="col" class="w-50" >回复</th>
+                            <th scope="col" class="w-25">回复时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% user.posts.forEach(function(post){ %>
+                            <tr>
+                                <td class="w-25"><a href="/subjects/<%= post.subject.id %>"><%= post.subject.title %></a></td>
+                                <td class="w-50"><%= post.content %></td>
+                                <td class="w-25"><%= post.createdAt %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include ../partials/footer %>

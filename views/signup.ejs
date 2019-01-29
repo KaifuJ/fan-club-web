@@ -1,0 +1,45 @@
+<% include partials/header %>
+
+<link rel="stylesheet" href="/stylesheets/signup.css">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-xl-9 mx-auto">
+      <div class="card card-signin flex-row my-5">
+        <div class="card-img-left d-none d-md-flex">
+            <!-- Background image for card set in CSS! -->
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center">注册</h5>
+          <form action="/signup" method="POST" class="form-signin">
+            <div class="form-label-group">
+              <input name="username" type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
+              <label for="inputUserame">用户名</label>
+            </div>
+
+            <div class="form-label-group">
+              <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+              <label for="inputEmail">Email</label>
+            </div>
+            
+            <hr>
+
+            <div class="form-label-group">
+              <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              <label for="inputPassword">密码</label>
+            </div>
+            
+            <div class="form-label-group">
+              <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
+              <label for="inputConfirmPassword">确认密码</label>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">注册</button>
+            <a class="d-block text-center mt-2 small" href="/login">登陆</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include partials/footer %>
