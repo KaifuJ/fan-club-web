@@ -1,10 +1,12 @@
+var albumDeleteHash = "wO8L23m1IjPC4cC";
+var clientId = "8ae2612bf7cb691";
+
 $("document").ready(function() {
     $("button").click(function(){
         var $files = $("input[type=file]").get(0).files;
 
         if($files.length){
             var apiUrl = "https://api.imgur.com/3/image";
-            var clientId = "8ae2612bf7cb691";
 
             var settings = {
                 async: false,
@@ -33,7 +35,7 @@ $("document").ready(function() {
                 // add the image to imgur album
                 $.ajax({
                     type: "POST",
-                    url: "https://api.imgur.com/3/album/uabL4IBX0N5KhGp/add",
+                    url: "https://api.imgur.com/3/album/" + albumDeleteHash + "/add",
                     headers: {
                         Authorization: 'Client-ID ' + clientId,
                         Accept: 'application/json'
