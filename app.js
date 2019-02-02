@@ -1,6 +1,5 @@
 var express = require("express"),
     app = express(),
-    seedDb = require("./seed"),
     User = require("./models/user"),
     bodyParser  = require("body-parser"),
     passport = require("passport"),
@@ -38,11 +37,12 @@ app.use(function(req, res, next){
 // import routes
 var indexRoutes = require("./routes/index"),
     subjectRoutes = require("./routes/subjects"),
-    userRoutes = require("./routes/users");
+    userRoutes = require("./routes/users"),
+    resourcesRoutes = require("./routes/resources");
 app.use(indexRoutes);
 app.use(subjectRoutes);
 app.use(userRoutes);
-
+app.use(resourcesRoutes);
 
 
 

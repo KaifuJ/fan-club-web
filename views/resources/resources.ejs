@@ -1,7 +1,32 @@
 <% include ../partials/header %>
 
 
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="w-75">歌曲名</th>
+                <th scope="col" class="w-25">下载</th>
+            </tr>
+        </thead>
 
+        <tbody>
+            <% for(var i = 1; i <= allMp3.length; i++){ %>
+                <tr>
+                    <th scope="row"><%= i %></th>
+                    <td class="pt-3">
+                        <%= allMp3[i - 1].name %>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="/resources/mp3/<%= allMp3[i - 1]._id %>" role="button">下载</a>
+                    </td>
+                </tr>
+            <% } %>
+            
+        </tbody>
+    </table>
+</div>
 
 
 <% include ../partials/footer %>
