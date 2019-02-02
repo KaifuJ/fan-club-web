@@ -8,4 +8,10 @@ middleware.isLoggedIn = function(req, res, next){
     }
 };
 
+middleware.isCurUser = function(req, res, next){
+    if(req.user && req.user._id.equals(req.params.id)){
+        next();
+    }
+}
+
 module.exports = middleware;

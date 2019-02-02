@@ -1,7 +1,8 @@
 var express = require("express"),
     router = express.Router(),
     User = require("../models/user")
-    request = require("request")
+    request = require("request"),
+    middleware = require("../middlewares")
 
 router.get("/users/:id", function(req, res){
     User.findById(req.params.id).populate("subjects posts").exec(function(err, user){
@@ -9,7 +10,7 @@ router.get("/users/:id", function(req, res){
     });
 });
 
-router.post("/users/:id/avatar", function(req, res){
+router.post("/users/:id/avatar", middleware.isCurUser, function(req, res){
     var clientId = "8ae2612bf7cb691";
 
     request({

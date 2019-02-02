@@ -24,6 +24,8 @@
                                 <img src="<%= user.avatarUrl %>" alt="..." class="img-thumbnail">
                             </div>
                         </div>
+
+                        <% if(curUser && curUser._id.equals(user._id)){ %>
                         <form>
                             <p class="d-flex justify-content-end mb-2">
                                 <input type="file" accept="image/*" data-max-size="5000"/>
@@ -32,6 +34,7 @@
                                 <button id="avatarUpload" type="button" class="btn btn-secondary">上传头像</button>
                             </p>
                         </form>
+                        <% } %>
                     </li>
                     <li class="list-group-item">用户名：<%= user.username %></li>
                     <li class="list-group-item">Email：<%= user.email %></li>
