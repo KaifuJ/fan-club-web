@@ -14,6 +14,7 @@ var postSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
+        avatarUrl: String,
         username: String
     }
 }, {

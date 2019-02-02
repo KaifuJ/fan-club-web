@@ -12,11 +12,13 @@ router.post("/subjects", middleware.isLoggedIn, function(req, res){
         content: req.body.subjectContent,
         user:{
             id: req.user._id,
+            avatarUrl: req.user.avatarUrl,
             username: req.user.username
         },
         posts: []
     }, function(err, subj){
-        req.user.sunjects.push(subj._id);
+        console.log(subj);
+        req.user.subjects.push(subj._id);
         req.user.save();
     });
     res.redirect("back");
@@ -24,7 +26,7 @@ router.post("/subjects", middleware.isLoggedIn, function(req, res){
 
 // all subjects page
 router.get("/subjects/all", function(req, res){
-    Subject.find({}, function(err, subjs){
+    Subject.find({}).sort("-updatedAt").exec(function(err, subjs){
         res.render("subjects/allSubjects", {subjects: subjs});
     });
 });
@@ -44,6 +46,11 @@ router.post("/subjects/:id/posts", middleware.isLoggedIn, function(req, res){
             subject:{
                 id: subj._id,
                 title: subj.title
+            },
+            user: {
+                id: req.user._id,
+                avatarUrl: req.user.avatarUrl,
+                username: req.user.username
             },
             content: req.body.postContent
         }, function(err, post){

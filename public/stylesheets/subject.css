@@ -3,5 +3,19 @@ th {
 }
 
 .posts {
-    height: 165px;
+    height: 175px;
+}
+
+.img-thumbnail {
+    min-width: 100px;
+    min-height: 100px;
+    width: 8vw;
+    height: 8vw;
+}
+
+.author {
+    min-width: 100px;
+    min-height: 100px;
+    width: 8vw;
+    height: 8vw;
 }

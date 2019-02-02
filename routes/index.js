@@ -28,7 +28,7 @@ router.post("/signup", function(req, res){
                 username: req.body.username,
                 email: req.body.email,
                 credits: 5,
-                avatarUrl: "https://i.imgur.com/0wc8tkU.png",
+                avatarUrl: "https://i.imgur.com/ywl6mLK.png",
                 avatarDeleteHash: ""
             });
 

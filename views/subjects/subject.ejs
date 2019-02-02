@@ -16,12 +16,20 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="posts" id="firstFloor"><%= subject.content %></td>
+                            <td id="firstFloor">
+                                <img src="<%= subject.user.avatarUrl %>" class="img-thumbnail">
+                                <%= subject.content %>
+                                <p class="ml-4 mb-0"><%= subject.user.username %></p>
+                            </td>
                         </tr>
 
                         <% subject.posts.forEach(function(post){ %>
                         <tr>
-                            <td class="posts"><%= post.content %></td>
+                            <td class="posts">
+                                <img src="<%= post.user.avatarUrl %>" class="img-thumbnail">
+                                <%= post.content %>
+                                <p class="ml-4 mb-0"><%= post.user.username %></p>
+                            </td>
                         </tr>
                         <% }); %>
                     </tbody>
