@@ -13,19 +13,23 @@ function processMp3Name(name){
     }
 }
 
-router.get("/resources", function(req, res){
-    Mp3.find({}).sort("downloadTimes").exec(function(err, allMp3){
+router.get("/resources/:page", function(req, res){
+    Mp3.find({}).sort("-downloadTimes").exec(function(err, allMp3){
+        var page = parseInt(req.params.page.substring(5));
+        allMp3 = allMp3.slice(50 * (page - 1), 50 * page);
         allMp3.forEach(function(mp3){
             mp3.name = processMp3Name(mp3.name);
         });
-        res.render("resources/resources", {allMp3: allMp3});
+        res.render("resources/resources", {allMp3: allMp3, page: page});
     });
 });
 
 router.get("/resources/mp3/:id", middleware.canDownload, function(req, res){
     Mp3.findById(req.params.id, function(err, mp3){
+        mp3.downloadTimes = mp3.downloadTimes + 1;
+        mp3.save();
         res.download("E:/mby/" + mp3.name);
-    })
+    });
 });
 
 module.exports = router;
