@@ -27,7 +27,21 @@ router.post("/subjects", middleware.isLoggedIn, function(req, res){
 // all subjects page
 router.get("/subjects/all", function(req, res){
     Subject.find({}).sort("-updatedAt").exec(function(err, subjs){
-        res.render("subjects/allSubjects", {subjects: subjs});
+        var page = req.query.page;
+        if(page){
+            page = parseInt(req.query.page);
+        }else{
+            page = 1;
+        }
+        
+        var totalNum = subjs.length;
+        var totalPages = Math.ceil(totalNum / 20);
+        subjs = subjs.slice(20 * (page - 1), 20 * page);
+        res.render("subjects/allSubjects", {
+            subjects: subjs, 
+            totalPages: totalPages,
+            page: page
+        });
     });
 });
 

@@ -13,14 +13,26 @@ function processMp3Name(name){
     }
 }
 
-router.get("/resources/:page", function(req, res){
+router.get("/resources", function(req, res){
     Mp3.find({}).sort("-downloadTimes").exec(function(err, allMp3){
-        var page = parseInt(req.params.page.substring(5));
-        allMp3 = allMp3.slice(50 * (page - 1), 50 * page);
+        var page = req.query.page;
+        if(page){
+            page = parseInt(req.query.page);
+        }else{
+            page = 1;
+        }
+
+        var totalNum = allMp3.length;
+        var totalPages = Math.ceil(totalNum / 30);
+        allMp3 = allMp3.slice(30 * (page - 1), 30 * page);
         allMp3.forEach(function(mp3){
             mp3.name = processMp3Name(mp3.name);
         });
-        res.render("resources/resources", {allMp3: allMp3, page: page});
+        res.render("resources/resources", {
+            allMp3: allMp3, 
+            totalPages: totalPages,
+            page: page
+        });
     });
 });
 
