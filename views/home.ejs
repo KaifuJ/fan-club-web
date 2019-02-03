@@ -1,33 +1,70 @@
 <% include partials/header %>
 
 <link rel="stylesheet" href="/stylesheets/home.css">
-<div class="container-fluid">
-  <div class="container mt-3">
-    <div class="row">
-      <div class="col-lg-6 px-1 ">
-          <div class="card">
-            <img src="http://pic.9ht.com/up/2017-10/20171011103433542640.jpg" class="card-img-top" alt="...">
-            <div class="card-body px-2 py-1">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-      </div>
 
-      <div class="col-lg-6 px-1">
-        <div class="card hottest ml-0">
-          <div class="card-header py-1">
-            最热帖子
+<div class="container mt-2">
+  <div class="row">
+    <div class="d-flex col-lg-6 px-1 align-items-center">
+      <div id="slide" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+              <img src="imgs/landing_1.jpg" class="headImg d-block w-100">
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item py-2"><a href="">帖子一</a></li>
-            <li class="list-group-item py-2"><a href="">帖子二</a></li>
-            <li class="list-group-item py-2"><a href="">帖子三</a></li>
-          </ul>
+          <div class="carousel-item">
+            <img src="imgs/landing_2.jpg" class="headImg d-block w-100">
+          </div>
+          <div class="carousel-item">
+            <img src="imgs/landing_3.jpg" class="headImg d-block w-100">
+          </div>
+          <div class="carousel-item">
+            <img src="imgs/landing_4.jpg" class="headImg d-block w-100">
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="col-lg-6 px-1">
+
+    </div>
+
+    <div class="col-lg-6 my-3 px-1">
+      <div class="card hottest ml-0">
+        <div class="card-header py-1">
+          最热帖子
+        </div>
+        <ul class="list-group list-group-flush">
+          <% subjects.forEach(function(subj){ %>
+            <li class="list-group-item py-2 pr-2 d-flex justify-content-between">
+              <a href="/subjects/<%= subj._id %>"><%= subj.title %></a>
+              <span><%= subj.updatedAt.toString().substring(0, 21) %></span>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-lg-6 my-3 px-1">
+      <div class="card hottest ml-0">
+        <div class="card-header py-1">
+          资源下载 - 毛不易唱吧
+        </div>
+        <ul class="list-group list-group-flush">
+          <% mp3s.forEach(function(mp3){ %>
+            <li class="list-group-item py-2 pr-2 d-flex justify-content-between">
+              <span class="pt-1"><%= mp3.name %></span>
+              <div>
+                <span class="pt-1 pr-5">下载次数：<%= mp3.downloadTimes %></span>
+                <a class="btn btn-primary btn-sm" href="/resources/mp3/<%= mp3._id %>" role="button">下载</a>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </div>
+
 
 
 <% include partials/footer %>

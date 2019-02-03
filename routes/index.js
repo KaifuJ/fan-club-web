@@ -1,7 +1,19 @@
 var express = require("express"),
     router = express.Router(),
     User = require("../models/user"),
-    passport = require("passport")
+    passport = require("passport"),
+    Subject = require("../models/subject"),
+    Mp3 = require("../models/mp3")
+
+function processMp3Name(name){
+    var first = name.substring(0, 1);
+    if(isNaN(first)){
+        return name.substring(0, name.length - 4);
+    }else{
+        var num = name.substring(0, name.indexOf(". "));
+        return name.substring(name.indexOf(". ") + 2, name.length - 4) + "\xa0\xa0\xa0( " + num + " )";
+    }
+}
 
 // landing page
 router.get("/", function(req, res){
@@ -10,7 +22,17 @@ router.get("/", function(req, res){
 
 // home page
 router.get("/home", function(req, res){
-    res.render("home");
+    Subject.find({}).sort("-updatedAt").limit(10).exec(function(err, subjs){
+        Mp3.find({}).sort("-downloadTimes").limit(9).exec(function(err, mp3s){
+            mp3s.forEach(function(mp3){
+                mp3.name = processMp3Name(mp3.name);
+            });
+            res.render("home", {
+                subjects: subjs,
+                mp3s: mp3s
+            });
+        })
+    })
 });
 
 // signup page
@@ -61,7 +83,7 @@ router.post("/login", passport.authenticate("local",
 // logout
 router.get("/logout", function(req, res){
     req.logout();
-    res.redirect("back");
+    res.redirect("/home");
 })
 
 module.exports = router;

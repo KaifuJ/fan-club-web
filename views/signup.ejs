@@ -1,6 +1,26 @@
 <% include partials/header %>
 
 <link rel="stylesheet" href="/stylesheets/signup.css">
+<script>
+$(document).ready(function(){
+  $("#inputConfirmPassword").keyup(function(){
+    if($(this).val() !== "" && $(this).val() === $("#inputPassword").val()){
+      $("button[type='submit']").prop("disabled", false);
+    }else{
+      $("button[type='submit']").prop("disabled", true);
+    }
+  });
+
+  $("#inputPassword").keyup(function(){
+    if($(this).val() !== "" && $(this).val() === $("#inputConfirmPassword").val()){
+      $("button[type='submit']").prop("disabled", false);
+    }else{
+      $("button[type='submit']").prop("disabled", true);
+    }
+  });
+});
+</script>
+
 <div class="container">
   <div class="row">
     <div class="col-lg-10 col-xl-9 mx-auto">
@@ -33,7 +53,7 @@
               <label for="inputConfirmPassword">确认密码</label>
             </div>
 
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">注册</button>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" disabled>注册</button>
             <a class="d-block text-center mt-2 small" href="/login">登陆</a>
           </form>
         </div>

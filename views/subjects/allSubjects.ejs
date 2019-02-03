@@ -51,7 +51,7 @@
                             <tr>
                                 <td class="w-50"><a href="<%= subj._id %>"><%= subj.title %></a></td>
                                 <td class="w-25"><a href="/users/<%= subj.user.id %>"><%= subj.user.username %></a></td>
-                                <td class="w-25"><%= subj.updatedAt %></td>
+                                <td class="w-25"><%= subj.updatedAt.toString().substring(0, 21) %></td>
                             </tr>
                         <% }) %>
                     </tbody>
