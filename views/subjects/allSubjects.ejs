@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-10">
+        <div class="col-lg-10">
             <div class="container mt-3">
                 <p class="d-flex justify-content-end">
                     <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">发布新帖</a>
@@ -51,7 +51,7 @@
                             <tr>
                                 <td class="w-50"><a href="<%= subj._id %>"><%= subj.title %></a></td>
                                 <td class="w-25"><a href="/users/<%= subj.user.id %>"><%= subj.user.username %></a></td>
-                                <td class="w-25"><%= subj.updatedAt.toString().substring(0, 21) %></td>
+                                <td class="w-25"><%= subj.updatedAt.toString().substring(4, 21) %></td>
                             </tr>
                         <% }) %>
                     </tbody>
@@ -78,8 +78,8 @@
 
         </div>
 
-        <div class="col-2">
-            <h2>Something comes later</h2>
+        <div class="col-lg-2">
+            <h2>Something comes later here.</h2>
         </div>
     </div>
 </div>
