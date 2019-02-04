@@ -31,7 +31,7 @@ router.get("/subjects/all", function(req, res){
         }
         
         var totalNum = subjs.length;
-        var totalPages = Math.ceil(totalNum / 20);
+        var totalPages = Math.ceil(totalNum / 20) === 0 ? 1 : Math.ceil(totalNum / 20);
         subjs = subjs.slice(20 * (page - 1), 20 * page);
         res.render("subjects/allSubjects", {
             subjects: subjs, 
@@ -65,8 +65,10 @@ router.get("/subjects/:id", function(req, res){
         }
 
         var totalNum = subj.posts.length;
-        var totalPages = Math.ceil(totalNum / 10);
-        subj.posts = subj.posts.slice(10 * (page - 1), 10 * page);
+        var totalPages = Math.ceil(totalNum / 9) === 0 ? 1 : Math.ceil(totalNum / 9);
+        
+        subj.posts = subj.posts.slice(9 * (page - 1), 9 * page);
+        
 
         res.render("subjects/subject", {
             subject: subj, 
