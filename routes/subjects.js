@@ -10,11 +10,7 @@ router.post("/subjects", middleware.isLoggedIn, function(req, res){
     Subject.create({
         title: req.body.subjectTitle,
         content: req.body.subjectContent,
-        user:{
-            id: req.user._id,
-            avatarUrl: req.user.avatarUrl,
-            username: req.user.username
-        },
+        user: req.user._id,
         posts: []
     }, function(err, subj){
         console.log(subj);
@@ -47,7 +43,20 @@ router.get("/subjects/all", function(req, res){
 
 // one subject show page
 router.get("/subjects/:id", function(req, res){
-    Subject.findById(req.params.id).populate("posts").exec(function(err, subj){
+    Subject.findById(req.params.id)
+    .populate("user", "avatarUrl username")
+    .populate({
+        path: "posts",
+        Model: "Post",
+        select: "user content",
+        populate:{
+            path: "user",
+            model: "User",
+            select: "username avatarUrl"
+        }
+    })
+    .exec(function(err, subj){
+        // console.log(subj);
         res.render("subjects/subject", {subject: subj});
     });
 });
@@ -61,11 +70,7 @@ router.post("/subjects/:id/posts", middleware.isLoggedIn, function(req, res){
                 id: subj._id,
                 title: subj.title
             },
-            user: {
-                id: req.user._id,
-                avatarUrl: req.user.avatarUrl,
-                username: req.user.username
-            },
+            user: req.user._id,
             content: req.body.postContent
         }, function(err, post){
             subj.posts.push(post._id);

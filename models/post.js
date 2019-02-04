@@ -10,12 +10,8 @@ var postSchema = mongoose.Schema({
     },
     content: String,
     user: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        avatarUrl: String,
-        username: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 }, {
     timestamps: true

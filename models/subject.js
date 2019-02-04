@@ -4,12 +4,8 @@ var subjectSchema = mongoose.Schema({
     title: String,
     content: String,
     user: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        avatarUrl: String,
-        username: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
     posts:[{
         type: mongoose.Schema.Types.ObjectId,
