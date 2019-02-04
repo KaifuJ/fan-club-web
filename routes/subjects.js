@@ -57,7 +57,22 @@ router.get("/subjects/:id", function(req, res){
     })
     .exec(function(err, subj){
         // console.log(subj);
-        res.render("subjects/subject", {subject: subj});
+        var page = req.query.page;
+        if(page){
+            page = parseInt(req.query.page);
+        }else{
+            page = 1;
+        }
+
+        var totalNum = subj.posts.length;
+        var totalPages = Math.ceil(totalNum / 10);
+        subj.posts = subj.posts.slice(10 * (page - 1), 10 * page);
+
+        res.render("subjects/subject", {
+            subject: subj, 
+            totalPages: totalPages,
+            page: page
+        });
     });
 });
 

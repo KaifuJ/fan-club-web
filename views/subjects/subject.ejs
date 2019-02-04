@@ -34,7 +34,27 @@
                         <% }); %>
                     </tbody>
                 </table>
+
                 <hr class="mt-0 mb-3">
+
+                <nav>
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item <%= page === 1 ? "disabled" : "" %>">
+                            <a class="page-link" href="?page=<%= page - 1 %>">上一页</a>
+                        </li>
+    
+                        <% for(var i = 1; i <= totalPages; i++){        %>
+                            <li class="page-item <%= page === i ? "active" : "" %>">
+                                <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+                            </li>
+                        <% } %>
+    
+                        <li class="page-item <%= page === totalPages ? "disabled" : "" %>">
+                            <a class="page-link" href="?page=<%= page + 1 %>">下一页</a>
+                        </li>
+                    </ul>
+                </nav>
+
                 <form action="/subjects/<%= subject._id %>/posts" method="POST">
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -46,6 +66,7 @@
                         <input class="btn btn-dark" type="submit" value="发布">
                     </p>
                 </form>
+                
             </div>
         </div>
         <div class="col-2">
